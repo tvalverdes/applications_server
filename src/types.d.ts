@@ -7,6 +7,20 @@ export type Application = {
   recruiter_profile_url: string
 }
 
+enum Sex {
+  MALE = 'M',
+  FEMALE = 'F',
+}
+
+export type User = {
+  name: string
+  email: string
+  password: string
+  country: string
+  sex: Sex
+  applications: Application[]
+}
+
 export type ResponseFormat = {
   message: string
 }
