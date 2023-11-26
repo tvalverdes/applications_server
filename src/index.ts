@@ -14,7 +14,7 @@ connectToDb()
   .then((res) => console.log(res))
   .then(() =>
     app.listen(port, () =>
-      console.log(`Example app listening on port ${port}!`)
+      console.log(`Example app listening on port http://localhost:${port}!`)
     )
   )
   .catch((err) => console.log(err))
