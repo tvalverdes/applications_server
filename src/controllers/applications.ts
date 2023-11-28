@@ -6,6 +6,6 @@ const router = Router()
 const application = new ApplicationService()
 
 router.get('/', (_, res) => res.send('Hello World'))
-router.post('/', validateApplication, application.createApplication)
+router.post('/', validateApplication, application.create)
 
 export default router

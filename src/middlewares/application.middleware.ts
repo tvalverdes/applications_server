@@ -7,8 +7,8 @@ const validateString = (value: string) => {
       .exists()
       .trim()
       .withMessage(`${value} is missing`)
-      .isLength({ max: 200 })
-      .withMessage(`${value} name length out of bounds. Max 200`),
+      .isLength({ min: 3, max: 200 })
+      .withMessage(`${value} name length out of bounds. Min: 3 Max: 200`),
   ]
 }
 const validateUrl = (value: string) => {

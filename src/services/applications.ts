@@ -1,16 +1,15 @@
 import { Request, Response } from 'express'
+import { ApplicationData, ResponseFormat } from '../types'
 import { ApplicationModel } from '../models/application.model'
-import { Application, ResponseFormat } from '../types'
 
 class ApplicationService {
-  async createApplication(req: Request, res: Response<ResponseFormat>) {
+  async create(req: Request, res: Response<ResponseFormat>) {
     try {
-      const application: Application = req.body
-      const newApplication = await ApplicationModel.create(application)
-      newApplication.save()
+      const application = req.body as ApplicationData
+      await ApplicationModel.create(application)
       res
         .status(201)
-        .send({ message: `Application ${newApplication.job_title} created` })
+        .send({ message: `Application ${application.job_title} created` })
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       if (error.code === 11000) {

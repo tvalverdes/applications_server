@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose'
-import { Application } from '../types'
+import { ApplicationData } from '../types'
 
-const ApplicationSchema = new Schema<Application>({
+const ApplicationSchema = new Schema<ApplicationData>({
   job_title: { type: String, required: true },
   company_name: { type: String, required: true },
   job_offer_url: { type: String, required: true },

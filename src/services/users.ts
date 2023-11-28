@@ -1,23 +1,24 @@
 import { Request, Response } from 'express'
-import { ApplicationModel } from '../models/application.model'
-import { ResponseFormat, User } from '../types'
+import { UserData, Person } from '../types'
+import { UserModel } from '../models/user.model'
 
-export const createUser = async (
-  req: Request,
-  res: Response<ResponseFormat>
-) => {
-  try {
-    const application: User = req.body
-    const newApplication = await ApplicationModel.create(application)
-    newApplication.save()
-    res
-      .status(201)
-      .send({ message: `Application ${newApplication.job_title} created` })
-  } catch (error: any) {
-    if (error.code === 11000) {
-      res.status(400).send({ message: 'Application already added' })
-    } else {
+class User implements Person {
+  async create(req: Request, res: Response) {
+    try {
+      const user = req.body as UserData
+      await UserModel.create(user)
+      res
+        .status(201)
+        .send({ message: `User ${user.name} created successfully` })
+    } catch (error) {
       res.status(500).send({ message: `An error occurred: ${error}` })
     }
   }
+
+  async findByEmail(email: string) {
+    const emailFound = await UserModel.findOne({ email })
+    return emailFound
+  }
 }
+
+export default User
